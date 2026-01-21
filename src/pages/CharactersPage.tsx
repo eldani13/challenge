@@ -45,7 +45,12 @@ const CharactersPage = () => {
                 <h2 className="font-bold text-xl text-blue-400 mb-1 truncate max-w-[140px]" title={character.name}>
                   {character.name}
                 </h2>
-                <span className="inline-block px-2 py-1 text-xs rounded bg-zinc-900 text-zinc-200 mb-1 w-fit">{character.species}</span>
+                <span
+                  className="inline-block px-2 py-1 text-xs rounded bg-zinc-900 text-zinc-200 mb-1 w-fit max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap"
+                  title={character.species}
+                >
+                  {character.species}
+                </span>
                 <span className={`inline-block px-2 py-1 text-xs rounded w-fit ${character.status === 'Alive' ? 'bg-green-700 text-green-200' : character.status === 'Dead' ? 'bg-red-700 text-red-200' : 'bg-zinc-700 text-zinc-200'}`}>{character.status}</span>
               </div>
             </div>

@@ -2,6 +2,11 @@ import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { debounce } from "../utils/debounce"
 
+/**
+ * Barra de búsqueda de personajes con debounce.
+ * Actualiza el parámetro 'name' en la URL.
+ * @returns JSX.Element
+ */
 const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialValue = searchParams.get("name") || ""

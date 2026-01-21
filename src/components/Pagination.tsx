@@ -1,11 +1,14 @@
+
 import { useSearchParams } from "react-router-dom"
+import type { PaginationProps } from "./types/Pagination.types"
 
-interface Props {
-  hasNext: boolean
-  hasPrev: boolean
-}
-
-const Pagination = ({ hasNext, hasPrev }: Props) => {
+/**
+ * Componente de paginación. Permite navegar entre páginas de resultados.
+ * @param hasNext Hay página siguiente
+ * @param hasPrev Hay página anterior
+ * @returns JSX.Element
+ */
+const Pagination = ({ hasNext, hasPrev }: PaginationProps) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
 

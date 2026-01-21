@@ -1,5 +1,9 @@
 import { Outlet, NavLink } from "react-router-dom"
 
+/**
+ * Componente de layout principal. Incluye navegación y outlet de rutas.
+ * @returns JSX.Element
+ */
 const Layout = () => {
   return (
     <div className="min-h-screen bg-zinc-900 text-white">

@@ -1,16 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react"
+
 import type { Character } from "../types"
+import type { FavoritesContextType } from "./types/FavoritesContext.types"
 
-interface FavoritesContextType {
-  favorites: Character[]
-  isFavorite: (id: number) => boolean
-  toggleFavorite: (character: Character) => void
-}
 
+/**
+ * Contexto de favoritos de personajes.
+ */
 const FavoritesContext = createContext<FavoritesContextType | null>(null)
 
 const STORAGE_KEY = "favorites"
 
+/**
+ * Proveedor de contexto para favoritos. Envuelve la app y expone favoritos y funciones para manipularlos.
+ * @param children Elementos hijos
+ */
 export const FavoritesProvider = ({
   children,
 }: {
@@ -53,6 +57,11 @@ export const FavoritesProvider = ({
   )
 }
 
+/**
+ * Hook para acceder al contexto de favoritos.
+ * @returns {FavoritesContextType} Acceso a favoritos y funciones
+ * @throws Error si se usa fuera de FavoritesProvider
+ */
 export const useFavorites = () => {
   const context = useContext(FavoritesContext)
   if (!context) {

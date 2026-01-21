@@ -1,5 +1,10 @@
 import { useSearchParams } from "react-router-dom"
 
+/**
+ * Componente de filtros por estado y especie.
+ * Actualiza los parámetros en la URL.
+ * @returns JSX.Element
+ */
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const status = searchParams.get("status") || ""

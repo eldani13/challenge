@@ -24,16 +24,72 @@ Challenge frontend construido con React y TypeScript para explorar personajes de
 - Sistema de favoritos con persistencia en localStorage
 - Estado sincronizado con la URL (búsqueda, filtros y paginación)
 
+
 ## Estructura del proyecto
 
-- components: componentes reutilizables de interfaz
-- pages: componentes asociados a las rutas
-- hooks: hooks personalizados para lógica de datos y estado
-- context: manejo de estado global (favoritos)
-- services: capa de acceso a la API
-- types: interfaces y tipos de TypeScript
-- utils: funciones auxiliares
-- test: configuración y utilidades de testing
+- **components/**: Componentes reutilizables de interfaz (UI). Cada archivo exporta un componente React funcional. Ejemplo: `Pagination`, `SearchBar`, `Layout`, `Filters`.
+- **pages/**: Componentes de página asociados a rutas. Cada archivo representa una vista principal. Ejemplo: `CharactersPage`, `CharacterDetailPage`, `FavoritesPage`.
+- **hooks/**: Hooks personalizados para lógica de datos y estado. Ejemplo: `useCharacters`, `useCharacter`.
+- **context/**: Manejo de estado global. Aquí está el contexto de favoritos (`FavoritesContext`).
+- **services/**: Capa de acceso a la API. Funciones para obtener datos de la API de Rick and Morty.
+- **types/**: Interfaces y tipos TypeScript. Modelos de datos usados en todo el proyecto.
+- **utils/**: Funciones auxiliares reutilizables. Ejemplo: `debounce`.
+- **test/**: Configuración y utilidades de testing.
+
+---
+
+## Documentación técnica de código
+
+### Modelos y Tipos (`src/types`)
+
+- **ApiInfo**: Información de paginación de la API.
+- **ApiResponse<T>**: Respuesta genérica de la API, contiene `info` y un array de resultados.
+- **CharacterStatus**: Estado posible de un personaje (`Alive`, `Dead`, `unknown`).
+- **Character**: Modelo de personaje de la API.
+- **Episode**: Modelo de episodio de la API.
+
+### Servicios (`src/services/rickAndMortyApi.ts`)
+
+- **getCharacters(params)**: Obtiene personajes con filtros y paginación. Parámetros: `page`, `name`, `status`, `species`.
+- **getCharacterById(id)**: Obtiene un personaje por su ID.
+- **getEpisodesByIds(ids)**: Obtiene uno o varios episodios por sus IDs.
+
+### Hooks personalizados (`src/hooks`)
+
+- **useCharacters(params)**: Hook para obtener y cachear la lista de personajes según filtros y paginación.
+- **useCharacter(id)**: Hook para obtener el detalle de un personaje y sus episodios.
+
+### Contexto (`src/context/FavoritesContext.tsx`)
+
+- **FavoritesProvider**: Proveedor de contexto para favoritos. Envuelve la app y expone favoritos y funciones para manipularlos.
+- **useFavorites()**: Hook para acceder al contexto de favoritos. Permite consultar y alternar favoritos.
+
+### Componentes (`src/components`)
+
+- **Layout**: Estructura general de la app, incluye navegación y outlet de rutas.
+- **Pagination**: Componente de paginación. Props: `hasNext`, `hasPrev`.
+- **SearchBar**: Barra de búsqueda con debounce. Actualiza el parámetro `name` en la URL.
+- **Filters**: Filtros por estado y especie. Actualiza parámetros en la URL.
+
+### Utilidades (`src/utils/debounce.ts`)
+
+- **debounce(fn, delay)**: Devuelve una función que retrasa la ejecución de `fn` hasta que deja de ser llamada por `delay` ms. Útil para optimizar búsquedas.
+
+---
+
+## Ejemplo de flujo de datos
+
+1. El usuario navega a `/characters`.
+2. `CharactersPage` usa `useCharacters` para obtener datos de la API.
+3. El usuario puede buscar, filtrar o paginar; los hooks y componentes actualizan la URL y los datos.
+4. Al hacer click en un personaje, se navega a `/characters/:id` y se usa `useCharacter` para mostrar detalle y episodios.
+5. El usuario puede agregar o quitar favoritos, que se guardan en localStorage y se acceden vía contexto.
+
+---
+
+## Documentación en el código
+
+Cada función, hook, modelo, componente y utilidad está documentada con comentarios JSDoc en el código fuente. Consulta cada archivo para ver detalles de parámetros, retornos y ejemplos de uso.
 
 ## Tests
 
